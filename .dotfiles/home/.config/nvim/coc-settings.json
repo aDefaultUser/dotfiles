@@ -1,0 +1,43 @@
+{
+  "languageserver": {
+    "termux": {
+      "command": "termux-language-server",
+      "filetypes": [
+        "sh",
+        "*.sh",
+        "*.subpackage.sh",
+        "PKGBUILD",
+        "*.install",
+        "makepkg.conf",
+        "*.ebuild",
+        "*.eclass",
+        "make.conf",
+        "color.map",
+        "devscripts.conf",
+        "*.devscripts",
+        "*.mdd",
+        ".bashrc"
+      ]
+    },
+    "csharp-ls": {
+      "command": "csharp-ls",
+      "filetypes": ["cs"],
+      "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
+    }
+  },
+  "diagnostic.checkCurrentLine": true,
+  "suggest.autoTrigger": "always",
+  "suggest.noselect": true,
+  "inlayHint.enable": true,
+  "inlayHint.position": "eol",
+  "inlayHint.display": true,
+  "colors.enable": true,
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "always",
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.debug.runtime": "vimspector",
+  "rust-analyzer.debug.vimspector.configuration.name": "rust-lldb"
+  //"xml.format.splitAttributes": true,
+  //"xml.format.joinContentLines": true,
+  //"xml.format.joinCommentLines": true
+}
