@@ -1,0 +1,30 @@
+[main]
+font=monospace:size=12
+use-bold=yes
+dpi-aware=no
+terminal=rio -e
+icons-enabled=yes
+prompt="> "
+horizontal-pad=0
+vertical-pad=0
+match-counter=yes
+list-executables-in-path=yes
+lines=10
+show-actions=yes
+
+[colors]
+background=282828ff
+text=ebdbb2ff
+input=fbf1c7ff
+prompt=b8bb26ff
+counter=928374ff
+match=fb4934ff
+selection=3c3836ff
+selection-text=ebdbb2ff
+selection-match=fabd2fff
+border=83a598ff
+#highlight=d3869bff
+
+[border]
+width=6
+radius=0

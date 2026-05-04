@@ -1,1 +1,0 @@
-sys-fs/fuse suid -a /etc/portage/package.use/fuse

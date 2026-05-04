@@ -1,0 +1,6 @@
+color=000000
+daemonize
+show-failed-attempts
+indicator-idle-visible
+indicator-caps-lock
+show-keyboard-layout

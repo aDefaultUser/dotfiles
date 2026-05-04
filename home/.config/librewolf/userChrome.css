@@ -1,0 +1,35 @@
+* {
+  font-family: "LiterationMono Nerd Font Propo" !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
+  border-radius: 0px !important;
+  --tab-inline-padding: 5px !important;
+}
+
+
+:root {
+  --tab-min-height: 24px !important;
+}
+
+.tabbrowser-tab {
+  padding: 0 !important;
+}
+
+.tab-content {
+  padding-left: 0 !important;
+}
+
+.tab-background,
+.toolbarbutton-1 {
+  margin: 0 !important;
+}
+
+toolbarbutton {
+  padding: 2px !important;
+}
+
+.tabbrowser-tab[usercontextid]>.tab-stack>.tab-background>.tab-context-line {
+  #tabbrowser-tabs[orient="vertical"] & {
+    width: 5px !important;
+  }
+}

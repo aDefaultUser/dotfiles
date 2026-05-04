@@ -1,0 +1,9 @@
+font=monospace 9
+default-timeout=5000
+ignore-timeout=1
+background-color=#0b0a07
+text-color=#c8faf0
+border-color=#b32809
+border-size=3
+anchor=top-right
+border-radius=0
