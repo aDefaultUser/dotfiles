@@ -1,4 +1,3 @@
-;;; Bootstrap straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el"
@@ -14,57 +13,53 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; Use straight by default
 (setq straight-use-package-by-default t)
 (setq warning-suppress-log-types '((native-compiler)))
 
-;;; ==================== Core Settings ====================
-
 (setq org-persist-remote-files nil)
-(setq org-persist-directory (expand-file-name "org-persist/" user-emacs-directory))
+(setq org-persist-directory
+      (expand-file-name "org-persist/" user-emacs-directory))
 
-;; Meta key = Alt
-(setq x-meta-keysym 'alt)           ; Linux/Windows
+(setq x-meta-keysym 'alt)
 (setq x-alt-keysym 'meta)
 
-;; Performance
 (setq gc-cons-threshold 100000000)
 (setq inhibit-startup-screen t)
-
-;;; ==================== Packages ====================
 
 (straight-use-package 'gruvbox-theme)
 (straight-use-package 'dashboard)
 (straight-use-package 'meow)
 (straight-use-package 'eglot)
 
-;;; ==================== Theme ====================
 (load-theme 'gruvbox-dark-hard t)
 
-;;; ==================== Dashboard ====================
 (use-package dashboard
   :config
   (setq dashboard-banner-logo-title "CLOUDMACS")
   (setq dashboard-center-content t)
   (setq dashboard-show-shortcuts t)
-  (setq dashboard-items '((recents   . 8)
-                          (bookmarks . 5)
-                          (projects  . 5)
-                          (agenda    . 5)))
+  (setq dashboard-items
+        '((recents . 8)
+          (bookmarks . 5)
+          (projects . 5)
+          (agenda . 5)))
   (dashboard-setup-startup-hook)
 
   :hook
-  (dashboard-mode . (lambda ()
-                      (setq-local line-spacing 2)
-                      (set-face-attribute 'dashboard-banner-logo-title nil
-                                          :height 320 :weight 'bold))))
+  (dashboard-mode
+   . (lambda ()
+       (setq-local line-spacing 2)
+       (set-face-attribute
+        'dashboard-banner-logo-title
+        nil
+        :height 320
+        :weight 'bold))))
 
-;;; ==================== Meow (Modal Editing) ====================
 (use-package meow
   :config
   (defun meow-setup ()
-    "Custom Meow configuration for QWERTY."
-    (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+    (setq meow-cheatsheet-layout
+          meow-cheatsheet-layout-qwerty)
 
     (meow-leader-define-key
      '("?" . meow-cheatsheet))
@@ -127,7 +122,6 @@
   (meow-setup)
   (meow-global-mode 1))
 
-;;; ==================== Eglot (LSP) ====================
 (use-package eglot
   :hook
   ((python-mode . eglot-ensure)
@@ -144,5 +138,5 @@
   (setq eglot-sync-connect 1)
   (setq eglot-autoshutdown t))
 
-;;; ==================== Final Settings ====================
+
 (setq initial-buffer-choice 'dashboard-open)

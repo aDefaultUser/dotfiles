@@ -1,4 +1,4 @@
-export PATH="$HOME/.local/bin:$PATH"
+export GPG_TTY=$(tty)
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
