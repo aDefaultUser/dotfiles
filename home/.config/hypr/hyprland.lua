@@ -59,6 +59,8 @@ hl.config({
         layout           = "master",
     },
 
+    cursor = { enable_hyprcursor = false, no_hardware_cursors = true, },
+
     decoration = {
         rounding       = 0,
         rounding_power = 0,
@@ -122,7 +124,7 @@ hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 
 
 hl.bind(mainMod .. " + Q",       hl.dsp.window.close())
-hl.bind(mainMod .. " + M",       hl.dsp.exit())
+hl.bind(mainMod .. " + SHIFT + M",       hl.dsp.exit())
 hl.bind(mainMod .. " + E",       hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V",       hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F",       hl.dsp.window.fullscreen({ mode = 1 }))
@@ -176,7 +178,13 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 
 hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot -m region --clipboard"))
 
+hl.window_rule({
+    -- Ignore maximize requests from all apps. You'll probably like this.
+    name           = "suppress-maximize-events",
+    match          = { class = ".*" },
 
+    suppress_event = "maximize",
+})
 
 hl.window_rule({
     match     = { class = "steam" },
@@ -196,6 +204,9 @@ hl.window_rule({
     no_screen_share = true,
 })
 
+hl.window_rule({                                                                                                               
+    match           = { class = "org.gajim.Gajim" },                                                                              no_screen_share = true,                                                                                                    
+})    
 
 hl.window_rule({
     match = { class = "hyprland-share-picker" },
@@ -223,4 +234,18 @@ hl.workspace_rule({
     workspace = "s[true]",
     gaps_in   = 50,
     gaps_out  = 20,
+})
+
+hl.window_rule({
+    name     = "fix-xwayland-drags",
+    match    = {
+        class      = "^$",
+        title      = "^$",
+        xwayland   = true,
+        float      = true,
+        fullscreen = false,
+        pin        = false,
+    },
+
+    no_focus = true,
 })
