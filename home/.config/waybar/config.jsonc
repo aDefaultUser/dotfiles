@@ -1,104 +1,93 @@
-// -*- mode: jsonc -*-
 {
-    "layer": "top", 
-    "position": "top", 
-    "height": 30, 
-    "spacing": 4, 
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
 
-    // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces",
         "custom/sep",
-       "hyprland/window",
+        "hyprland/window",
         "custom/sep",
-	"custom/xwayland",
-	"custom/sep"
+        "custom/xwayland",
+        "custom/sep"
     ],
-    "modules-center": [
-    ],
-
+    "modules-center": [],
     "modules-right": [
         "custom/sep",
         "network",
         "custom/sep",
-	"wireplumber",
-	"custom/sep",
+        "wireplumber",
+        "custom/sep",
         "cpu",
         "custom/sep",
         "memory",
         "custom/sep",
-        //"disk",
-        //"custom/sep",
-        //"clock",
-        //"custom/sep",
         "tray"
     ],
 
+    "custom/xwayland": {
+        "interval": 1,
+        "exec": "for f in $(xlsclients -a | cut -d ' ' -f3-) ; do echo '['$f']' ; done | xargs",
+        "format": "XWayland:{}",
+        "tooltip": false
+    },
 
-
- "custom/xwayland": {
-    "interval": 1,
-    "exec": "for f in $(xlsclients -a | cut -d ' ' -f3-) ; do echo '['$f']' ; done | xargs",
-    "format": "XWayland:{}",
-    "tooltip": false
-  },
-
-
-    // Modules configuration
     "hyprland/workspaces": {
+        "output": "DP-3",               // <-- only workspaces on the right monitor
         "disable-scroll": true,
-        "all-outputs": true,
         "warp-on-scroll": false,
         "format": "{name}",
         "persistent-workspaces": {
-            "*" : 9
+            "*": 9
         }
     },
-    "hyprland/window" : {
+
+    "hyprland/window": {
         "max-length": 40,
         "seperate-outputs": false
     },
+
     "tray": {
-        // "icon-size": 21,
         "spacing": 10
-        // "icons": {
-        //   "blueman": "bluetooth",
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-        // }
     },
+
     "clock": {
         "format-alt": "{:%Y-%m-%d}"
     },
+
     "cpu": {
         "format": "CPU: {usage}%",
         "tooltip": false
     },
+
     "memory": {
         "format": "Mem: {used}GiB"
     },
+
     "disk": {
         "interval": 60,
         "path": "/",
         "format": "Disk: {free}"
     },
 
-
     "wireplumber": {
-    "format": "VOL: {volume}%",
-    "format-muted": "Muted",
-    "scroll-step": 5,
-    "on-click": "wpctl",          // or wpctl or your favorite mixer
-    "on-click-right": "flatpak run org.pipewire.Helvum",         // pipewire patchbay (optional)
-    "on-scroll-up":   "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
-    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-},
+        "format": "VOL: {volume}%",
+        "format-muted": "Muted",
+        "scroll-step": 5,
+        "on-click": "wpctl",
+        "on-click-right": "flatpak run org.pipewire.Helvum",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    },
 
     "network": {
         "format": "Online",
         "format-disconnected": "Disconnected"
     },
+
     "custom/sep": {
-        "format" : "|",
-        "interval" : 0
+        "format": "|",
+        "interval": 0
     }
 }
