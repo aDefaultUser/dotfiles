@@ -3,6 +3,7 @@
     "position": "top",
     "height": 30,
     "spacing": 4,
+    "output": "DP-1",
 
     "modules-left": [
         "hyprland/workspaces",
@@ -34,7 +35,7 @@
     },
 
     "hyprland/workspaces": {
-        "output": "DP-3",               // <-- only workspaces on the right monitor
+        "output": "DP-1",
         "disable-scroll": true,
         "warp-on-scroll": false,
         "format": "{name}",

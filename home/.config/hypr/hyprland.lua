@@ -4,10 +4,11 @@ local menu         = "fuzzel"
 local mainMod      = "SUPER"
 
 local hs = require("hyprsplit")
+
 hs.config({
     num_workspaces = 10,
     persistent_workspaces = true,
-    force_monitor_priority = false,
+    force_monitor_priority = true,
 })
 
 hl.monitor({
@@ -24,8 +25,7 @@ hl.monitor({
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")
-    hl.exec_cmd("swaybg -o DP-1 -i /home/fcc/walls/wall.png -m fill")
-    hl.exec_cmd("swaybg -o DP-3 -i /home/fcc/walls/wall.png -m fill")
+    hl.exec_cmd("wbg /home/fcc/walls/wall.png")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("/usr/libexec/xdg-desktop-portal -r")
     hl.exec_cmd("/usr/libexec/xdg-desktop-portal-gtk -r")
@@ -75,13 +75,21 @@ hl.config({
     cursor = { enable_hyprcursor = false, no_hardware_cursors = true, },
 
     decoration = {
-        rounding       = 0,
+        rounding = 0,
         rounding_power = 0,
-        active_opacity   = 1.0,
+        active_opacity = 1.0,
         inactive_opacity = 1.0,
         shadow = { enabled = false },
-        blur   = { enabled = false },
-    },
+        blur = {
+	enabled = true,
+	ignore_opacity = false,
+	size = 8,
+	passes = 2,
+	contrast = 2.0,
+	brightness = 2.0,
+	vibrancy_darkness = 1.0,
+        },
+},
 
     animations = { enabled = false },
 
@@ -137,7 +145,7 @@ hl.bind(mainMod .. " + P",       hl.dsp.window.pseudo())
 
 hl.bind(mainMod .. " + C", function()
     hl.dispatch(hl.dsp.exec_cmd("wpctl set-sink-mute @DEFAULT_SINK@ 1"))
-    hl.dispatch(hl.dsp.exec_cmd("swaylock"))
+    hl.dispatch(hl.dsp.exec_cmd("waylock"))
 end)
 
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "l" }))

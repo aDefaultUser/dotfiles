@@ -13,47 +13,35 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(setq straight-use-package-by-default t)
-(setq warning-suppress-log-types '((native-compiler)))
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-(setq org-persist-remote-files nil)
-(setq org-persist-directory
-      (expand-file-name "org-persist/" user-emacs-directory))
+(require 'core)
+(require 'packages)
+(require 'ui)
+(require 'lsp)
 
 (setq x-meta-keysym 'alt)
 (setq x-alt-keysym 'meta)
 
-(setq gc-cons-threshold 100000000)
-(setq inhibit-startup-screen t)
+(defvar --backup-directory (concat user-emacs-directory "backups"))
+(if (not (file-exists-p --backup-directory))
+        (make-directory --backup-directory t))
+(setq backup-directory-alist `(("." . ,--backup-directory)))
+(setq make-backup-files t               ; backup of a file t xche first time it is saved.
+      backup-by-copying t               ; don't clobber symlinks
+      version-control t                 ; version numbers for backup files
+      delete-old-versions t             ; delete excess backup files silently
+      delete-by-moving-to-trash t
+      kept-old-versions 6               ; oldest versions to keep when a new numbered backup is made (default: 2)
+      kept-new-versions 9               ; newest versions to keep when a new numbered backup is made (default: 2)
+      auto-save-default t               ; auto-save every buffer that visits a file
+      auto-save-timeout 20              ; number of seconds idle time before auto-save (default: 30)
+      auto-save-interval 200            ; number of keystrokes between auto-saves (default: 300)
+      )
 
-(straight-use-package 'gruvbox-theme)
-(straight-use-package 'dashboard)
-(straight-use-package 'meow)
-(straight-use-package 'eglot)
-
-(load-theme 'gruvbox-dark-hard t)
-
-(use-package dashboard
-  :config
-  (setq dashboard-banner-logo-title "CLOUDMACS")
-  (setq dashboard-center-content t)
-  (setq dashboard-show-shortcuts t)
-  (setq dashboard-items
-        '((recents . 8)
-          (bookmarks . 5)
-          (projects . 5)
-          (agenda . 5)))
-  (dashboard-setup-startup-hook)
-
-  :hook
-  (dashboard-mode
-   . (lambda ()
-       (setq-local line-spacing 2)
-       (set-face-attribute
-        'dashboard-banner-logo-title
-        nil
-        :height 320
-        :weight 'bold))))
+;; Auto save files too
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "backups/") t)))
 
 (use-package meow
   :config
@@ -121,22 +109,3 @@
 
   (meow-setup)
   (meow-global-mode 1))
-
-(use-package eglot
-  :hook
-  ((python-mode . eglot-ensure)
-   (python-ts-mode . eglot-ensure)
-   (js-mode . eglot-ensure)
-   (typescript-mode . eglot-ensure)
-   (tsx-ts-mode . eglot-ensure)
-   (rust-mode . eglot-ensure)
-   (rust-ts-mode . eglot-ensure)
-   (go-mode . eglot-ensure)
-   (c-mode . eglot-ensure)
-   (c++-mode . eglot-ensure))
-  :config
-  (setq eglot-sync-connect 1)
-  (setq eglot-autoshutdown t))
-
-
-(setq initial-buffer-choice 'dashboard-open)
