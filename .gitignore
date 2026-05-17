@@ -1,3 +1,4 @@
 home/.emacs.d/*
 !home/.emacs.d/init.el
 !home/.emacs.d/early-init.el
+!home/emacs.d/lisp/*
